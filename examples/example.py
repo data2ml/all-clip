@@ -4,10 +4,10 @@ from PIL import Image
 import pathlib
 
 
-model, preprocess, tokenizer = load_clip("ViT-B/32", device="cuda")
+model, preprocess, tokenizer = load_clip("ViT-B/32", device="cpu", use_jit=False)
 
 
-image = preprocess(Image.open(pathlib.Path(__file__).parent.resolve() + "/CLIP.png")).unsqueeze(0)
+image = preprocess(Image.open(str(pathlib.Path(__file__).parent.resolve()) + "/CLIP.png")).unsqueeze(0)
 text = tokenizer(["a diagram", "a dog", "a cat"])
 
 with torch.no_grad(), torch.cuda.amp.autocast():

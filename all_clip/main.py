@@ -204,7 +204,8 @@ def load_clip_without_warmup(clip_model, use_jit, device, clip_cache_path):
         model, preprocess = load_deepsparse(clip_model)
     else:
         model, preprocess = clip.load(clip_model, device=device, jit=use_jit, download_root=clip_cache_path)
-    return model, preprocess
+    tokenizer = get_tokenizer(clip_model)
+    return model, preprocess, tokenizer
 
 
 @lru_cache(maxsize=None)
@@ -218,14 +219,14 @@ def load_clip(
     """Load clip then warmup"""
     if device is None:
         device = "cuda" if torch.cuda.is_available() else "cpu"
-    model, preprocess = load_clip_without_warmup(clip_model, use_jit, device, clip_cache_path)
+    model, preprocess, tokenizer = load_clip_without_warmup(clip_model, use_jit, device, clip_cache_path)
 
     start = time.time()
     print(f"warming up with batch size {warmup_batch_size} on {device}", flush=True)
     warmup(warmup_batch_size, device, preprocess, model)
     duration = time.time() - start
     print(f"done warming up in {duration}s", flush=True)
-    return model, preprocess
+    return model, preprocess, tokenizer
 
 
 def warmup(batch_size, device, preprocess, model):
