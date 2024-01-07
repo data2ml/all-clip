@@ -48,6 +48,12 @@ This module exposes a single function `load_clip`:
 * **clip_cache_path** cache path for clip (default *None*)
 * **device** device (default *None*)
 
+## Related projects
+
+* [clip-retrieval](https://github.com/rom1504/clip-retrieval) to use clip for inference, and retrieval
+* [open_clip](https://github.com/mlfoundations/open_clip) to train clip models
+* [CLIP_benchmark](https://github.com/LAION-AI/CLIP_benchmark) to evaluate clip models
+
 ## Supported models
 
 ### OpenAI
