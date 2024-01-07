@@ -2,10 +2,19 @@ from all_clip import load_clip
 import torch
 from PIL import Image
 import pathlib
+import pytest
 
-
-def test_load_clip():
-    model, preprocess, tokenizer = load_clip("ViT-B/32", device="cpu", use_jit=False)
+@pytest.mark.parametrize(
+    "model",
+    [
+        "ViT-B/32",
+        "open_clip:ViT-B-32/laion2b_s34b_b79k",
+        "hf_clip:patrickjohncyh/fashion-clip",
+        "nm:mgoin/CLIP-ViT-B-32-laion2b_s34b_b79k-ds",
+    ],
+)
+def test_load_clip(model):
+    model, preprocess, tokenizer = load_clip(model, device="cpu", use_jit=False)
 
     image = preprocess(Image.open(str(pathlib.Path(__file__).parent.resolve()) + "/CLIP.png")).unsqueeze(0)
     text = tokenizer(["a diagram", "a dog", "a cat"])

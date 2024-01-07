@@ -4,7 +4,7 @@ from PIL import Image
 import pathlib
 
 
-model, preprocess, tokenizer = load_clip("ViT-B/32", device="cpu", use_jit=False)
+model, preprocess, tokenizer = load_clip("open_clip:ViT-B-32/laion2b_s34b_b79k", device="cpu", use_jit=False)
 
 
 image = preprocess(Image.open(str(pathlib.Path(__file__).parent.resolve()) + "/CLIP.png")).unsqueeze(0)
