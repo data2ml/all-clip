@@ -1,0 +1,6 @@
+torch
+clip-anytorch>=2.5.0,<3
+open-clip-torch>=2.0.0,<3.0.0
+multilingual-clip>=1.0.10,<2
+transformers
+numpy
