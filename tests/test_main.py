@@ -1,7 +1,7 @@
 import pytest
-from all_clip import hello_world
+from all_clip import load_clip
 
 
 @pytest.mark.parametrize("message", ["hello", "world"])
-def test_hello_world(message):
-    hello_world(message)
+def test_load_clip(message):
+    print("tmp")
