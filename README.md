@@ -1,13 +1,13 @@
-# python_template
-[![pypi](https://img.shields.io/pypi/v/python_template.svg)](https://pypi.python.org/pypi/python_template)
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rom1504/python_template/blob/master/notebook/python_template_getting_started.ipynb)
-[![Try it on gitpod](https://img.shields.io/badge/try-on%20gitpod-brightgreen.svg)](https://gitpod.io/#https://github.com/rom1504/python_template)
+# all_clip
+[![pypi](https://img.shields.io/pypi/v/all_clip.svg)](https://pypi.python.org/pypi/all_clip)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rom1504/all_clip/blob/master/notebook/all_clip_getting_started.ipynb)
+[![Try it on gitpod](https://img.shields.io/badge/try-on%20gitpod-brightgreen.svg)](https://gitpod.io/#https://github.com/rom1504/all_clip)
 
-A nice template to start with
+Load any clip model with a standardized interface
 
 ## Install
 
-pip install python_template
+pip install all_clip
 
 ## Python examples
 
@@ -22,7 +22,7 @@ This module exposes a single function `hello_world` which takes the same argumen
 
 ## For development
 
-Either locally, or in [gitpod](https://gitpod.io/#https://github.com/rom1504/python_template) (do `export PIP_USER=false` there)
+Either locally, or in [gitpod](https://gitpod.io/#https://github.com/rom1504/all_clip) (do `export PIP_USER=false` there)
 
 Setup a virtualenv:
 
