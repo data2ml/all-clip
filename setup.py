@@ -19,7 +19,7 @@ if __name__ == "__main__":
         include_package_data=True,
         version="1.0.0",
         license="MIT",
-        description="A python template",
+        description="Load any clip model with a standardized interface",
         long_description=long_description,
         long_description_content_type="text/markdown",
         author="Romain Beaumont",
