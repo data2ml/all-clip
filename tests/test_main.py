@@ -8,10 +8,11 @@ import pytest
 @pytest.mark.parametrize(
     "model",
     [
-        "ViT-B/32",
+        "openai_clip:ViT-B/32",
         "open_clip:ViT-B-32/laion2b_s34b_b79k",
         "hf_clip:patrickjohncyh/fashion-clip",
         "nm:mgoin/CLIP-ViT-B-32-laion2b_s34b_b79k-ds",
+        "ja_clip:rinna/japanese-clip-vit-b-16",
     ],
 )
 def test_load_clip(model):

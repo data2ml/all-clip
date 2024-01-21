@@ -31,14 +31,14 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.8, '3.10']
+        model: ['openai_clip', 'open_clip', 'hf_clip', 'nm', 'ja_clip']
 
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
+    - name: Set up Python 3.10
       uses: actions/setup-python@v2
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: '3.10'
     - name: Install
       run: |
         python3 -m venv .env
@@ -48,5 +48,5 @@ jobs:
     - name: Unit tests
       run: |
         source .env/bin/activate
-        make test
+        python -m pytest -x -s -v tests -k ${{ matrix.model }}
 

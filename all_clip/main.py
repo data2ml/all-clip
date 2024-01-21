@@ -8,12 +8,15 @@ from .deepsparse_clip import load_deepsparse
 from .hf_clip import load_hf_clip
 from .open_clip import load_open_clip
 from .openai_clip import load_openai_clip
+from .ja_clip import load_japanese_clip
 
 
 _CLIP_REGISTRY = {
     "open_clip:": load_open_clip,
     "hf_clip:": load_hf_clip,
     "nm:": load_deepsparse,
+    "ja_clip:": load_japanese_clip,
+    "openai_clip:": load_openai_clip,
     "": load_openai_clip,
 }
 
