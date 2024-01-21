@@ -17,7 +17,7 @@ if __name__ == "__main__":
         name="all_clip",
         packages=find_packages(),
         include_package_data=True,
-        version="1.1.0",
+        version="1.2.0",
         license="MIT",
         description="Load any clip model with a standardized interface",
         long_description=long_description,
