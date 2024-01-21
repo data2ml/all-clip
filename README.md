@@ -42,7 +42,7 @@ Checkout these examples to call this as a lib:
 
 This module exposes a single function `load_clip`:
 
-* **clip_model** CLIP model to load (default *ViT-B/32*). Specify it as `"open_clip:ViT-B-32/laion2b_s34b_b79k"` to use the [open_clip](https://github.com/mlfoundations/open_clip) or `"hf_clip:patrickjohncyh/fashion-clip"` to use the [hugging face](https://huggingface.co/docs/transformers/model_doc/clip) clip model.
+* **clip_model** CLIP model to load (default *ViT-B/32*). See below supported models section.
 * **use_jit** uses jit for the clip model (default *True*)
 * **warmup_batch_size** warmup batch size (default *1*)
 * **clip_cache_path** cache path for clip (default *None*)
