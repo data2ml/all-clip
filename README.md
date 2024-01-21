@@ -72,6 +72,11 @@ Specify the model as "ViT-B-32"
 
 [DeepSparse](https://github.com/neuralmagic/deepsparse) is an inference runtime for fast sparse model inference on CPUs. There is a backend available within clip-retrieval by installing it with `pip install deepsparse-nightly[clip]`, and specifying a `clip_model` with a prepended `"nm:"`, such as [`"nm:neuralmagic/CLIP-ViT-B-32-256x256-DataComp-s34B-b86K-quant-ds"`](https://huggingface.co/neuralmagic/CLIP-ViT-B-32-256x256-DataComp-s34B-b86K-quant-ds) or [`"nm:mgoin/CLIP-ViT-B-32-laion2b_s34b_b79k-ds"`](https://huggingface.co/mgoin/CLIP-ViT-B-32-laion2b_s34b_b79k-ds).
 
+### Japanese clip
+
+[japanese-clip](https://github.com/rinnakk/japanese-clip) provides some models for japanese.
+For example one is `ja_clip:rinna/japanese-clip-vit-b-16`
+
 ## For development
 
 Either locally, or in [gitpod](https://gitpod.io/#https://github.com/rom1504/all_clip) (do `export PIP_USER=false` there)
@@ -96,4 +101,4 @@ make test
 
 You can use `make black` to reformat the code
 
-`python -m pytest -x -s -v tests -k "dummy"` to run a specific test
+`python -m pytest -x -s -v tests -k "ja_clip"` to run a specific test
