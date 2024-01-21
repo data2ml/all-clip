@@ -4,6 +4,7 @@ from PIL import Image
 import pathlib
 import pytest
 
+
 @pytest.mark.parametrize(
     "model",
     [

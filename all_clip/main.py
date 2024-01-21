@@ -68,7 +68,7 @@ class OpenClipWrapper(nn.Module):
         return self.inner_model(*args, **kwargs)
 
 
-def load_hf_clip(clip_model, device="cuda"):
+def load_hf_clip(clip_model, use_jit, device, clip_cache_path):  # pylint: disable=unused-argument
     """load hf clip"""
     from transformers import CLIPProcessor, CLIPModel  # pylint: disable=import-outside-toplevel
 
@@ -76,7 +76,11 @@ def load_hf_clip(clip_model, device="cuda"):
     preprocess = CLIPProcessor.from_pretrained(clip_model).image_processor
     model = HFClipWrapper(inner_model=model, device=device)
     model.to(device=device)
-    return model, lambda x: preprocess(x, return_tensors="pt").pixel_values
+
+    def tokenizer(t):
+        return clip.tokenize(t, truncate=True)
+
+    return model, lambda x: preprocess(x, return_tensors="pt").pixel_values, tokenizer
 
 
 def load_open_clip(clip_model, use_jit=True, device="cuda", clip_cache_path=None):
@@ -100,7 +104,8 @@ def load_open_clip(clip_model, use_jit=True, device="cuda", clip_cache_path=None
     )
     model = OpenClipWrapper(inner_model=model, device=device)
     model.to(device=device)
-    return model, preprocess
+
+    return model, preprocess, open_clip.get_tokenizer(clip_model)
 
 
 class DeepSparseWrapper(nn.Module):
@@ -153,7 +158,7 @@ class DeepSparseWrapper(nn.Module):
         return NotImplemented
 
 
-def load_deepsparse(clip_model):
+def load_deepsparse(clip_model, use_jit, device, clip_cache_path):  # pylint: disable=unused-argument
     """load deepsparse"""
 
     from huggingface_hub import snapshot_download  # pylint: disable=import-outside-toplevel
@@ -175,37 +180,40 @@ def load_deepsparse(clip_model):
         )
         return torch.from_numpy(np.ascontiguousarray(image_array, dtype=np.float32))
 
-    return model, process_image
+    def tokenizer(t):
+        return clip.tokenize(t, truncate=True)
+
+    return model, process_image, tokenizer
 
 
-@lru_cache(maxsize=None)
-def get_tokenizer(clip_model):
-    """Load clip"""
-    if clip_model.startswith("open_clip:"):
-        import open_clip  # pylint: disable=import-outside-toplevel
+def load_openai_clip(clip_model, use_jit, device, clip_cache_path):
+    model, preprocess = clip.load(clip_model, device=device, jit=use_jit, download_root=clip_cache_path)
 
-        clip_model = clip_model[len("open_clip:") :]
-        return open_clip.get_tokenizer(clip_model)
-    else:
-        return lambda t: clip.tokenize(t, truncate=True)
+    def tokenizer(t):
+        return clip.tokenize(t, truncate=True)
+
+    return model, preprocess, tokenizer
+
+
+_CLIP_REGISTRY = {
+    "open_clip:": load_open_clip,
+    "hf_clip:": load_hf_clip,
+    "nm:": load_deepsparse,
+    "": load_openai_clip,
+}
 
 
 @lru_cache(maxsize=None)
 def load_clip_without_warmup(clip_model, use_jit, device, clip_cache_path):
     """Load clip"""
-    if clip_model.startswith("open_clip:"):
-        clip_model = clip_model[len("open_clip:") :]
-        model, preprocess = load_open_clip(clip_model, use_jit, device, clip_cache_path)
-    elif clip_model.startswith("hf_clip:"):
-        clip_model = clip_model[len("hf_clip:") :]
-        model, preprocess = load_hf_clip(clip_model, device)
-    elif clip_model.startswith("nm:"):
-        clip_model = clip_model[len("nm:") :]
-        model, preprocess = load_deepsparse(clip_model)
-    else:
-        model, preprocess = clip.load(clip_model, device=device, jit=use_jit, download_root=clip_cache_path)
-    tokenizer = get_tokenizer(clip_model)
-    return model, preprocess, tokenizer
+
+    for prefix, loader in _CLIP_REGISTRY.items():
+        if clip_model.startswith(prefix):
+            clip_model = clip_model[len(prefix) :]
+            model, preprocess, tokenizer = loader(clip_model, use_jit, device, clip_cache_path)
+            return model, preprocess, tokenizer
+
+    raise ValueError(f"Unknown clip model {clip_model}")
 
 
 @lru_cache(maxsize=None)
