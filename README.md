@@ -77,6 +77,20 @@ Specify the model as "ViT-B-32"
 [japanese-clip](https://github.com/rinnakk/japanese-clip) provides some models for japanese.
 For example one is `ja_clip:rinna/japanese-clip-vit-b-16`
 
+## How to add a model type
+
+Please follow these steps:
+1. Add a file to load model in `all_clip/`
+2. Define a loading function, that returns a tuple (model, transform, tokenizer). Please see `all_clip/open_clip.py` as an example. 
+3. Add the function into `TYPE2FUNC` in `all_clip/main.py`
+4. Add the model type in `test_main.py` and `ci.yml`
+
+Remarks:
+- The new tokenizer/model must enable to do the following things as https://github.com/openai/CLIP#usage
+  - `tokenizer(texts).to(device)`  ... `texts` is a list of string
+  - `model.encode_text(tokenized_texts)` ... `tokenized_texts` is a output from `tokenizer(texts).to(device)`
+  - `model.encode_image(images)` ... `images` is a image tensor by the `transform`
+
 ## For development
 
 Either locally, or in [gitpod](https://gitpod.io/#https://github.com/rom1504/all_clip) (do `export PIP_USER=false` there)
