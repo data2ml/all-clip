@@ -24,7 +24,7 @@ if __name__ == "__main__":
         long_description_content_type="text/markdown",
         author="Romain Beaumont",
         author_email="romain.rom1@gmail.com",
-        url="https://github.com/rom1504/all_clip",
+        url="https://github.com/DataToML/all_clip",
         data_files=[(".", ["README.md"])],
         keywords=["machine learning"],
         install_requires=REQUIREMENTS,

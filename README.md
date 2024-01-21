@@ -1,7 +1,5 @@
 # all_clip
 [![pypi](https://img.shields.io/pypi/v/all_clip.svg)](https://pypi.python.org/pypi/all_clip)
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rom1504/all_clip/blob/master/notebook/all_clip_getting_started.ipynb)
-[![Try it on gitpod](https://img.shields.io/badge/try-on%20gitpod-brightgreen.svg)](https://gitpod.io/#https://github.com/rom1504/all_clip)
 
 Load any clip model with a standardized interface
 
@@ -92,8 +90,6 @@ Remarks:
   - `model.encode_image(images)` ... `images` is a image tensor by the `transform`
 
 ## For development
-
-Either locally, or in [gitpod](https://gitpod.io/#https://github.com/rom1504/all_clip) (do `export PIP_USER=false` there)
 
 Setup a virtualenv:
 
