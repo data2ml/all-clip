@@ -9,6 +9,7 @@ from .hf_clip import load_hf_clip
 from .open_clip import load_open_clip
 from .openai_clip import load_openai_clip
 from .ja_clip import load_japanese_clip
+from .cn_clip import load_chinese_clip
 
 
 _CLIP_REGISTRY = {
@@ -17,6 +18,7 @@ _CLIP_REGISTRY = {
     "nm:": load_deepsparse,
     "ja_clip:": load_japanese_clip,
     "openai_clip:": load_openai_clip,
+    "cn_clip:": load_chinese_clip,
     "": load_openai_clip,
 }
 

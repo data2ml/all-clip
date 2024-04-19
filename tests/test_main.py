@@ -13,6 +13,7 @@ import pytest
         "hf_clip:patrickjohncyh/fashion-clip",
         "nm:mgoin/CLIP-ViT-B-32-laion2b_s34b_b79k-ds",
         "ja_clip:rinna/japanese-clip-vit-b-16",
+        "cn_clip:ViT-B-16/no_checkpoint"
     ],
 )
 def test_load_clip(model):
