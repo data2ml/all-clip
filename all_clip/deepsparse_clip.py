@@ -1,4 +1,4 @@
-""" https://github.com/neuralmagic/deepsparse/tree/bc4ffd305ac52718cc755430a1c44eb48739cfb4/src/deepsparse/clip """
+"""https://github.com/neuralmagic/deepsparse/tree/bc4ffd305ac52718cc755430a1c44eb48739cfb4/src/deepsparse/clip"""
 
 from torch import nn
 import torch
