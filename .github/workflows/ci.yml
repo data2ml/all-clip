@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        model: ['openai_clip', 'open_clip', 'hf_clip']
+        model: ['openai_clip', 'open_clip', 'hf_clip', 'cn_clip']
 
     steps:
     - uses: actions/checkout@v4
