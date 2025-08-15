@@ -1,4 +1,5 @@
 """load clip"""
+
 from functools import lru_cache
 import torch
 from PIL import Image
