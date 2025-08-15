@@ -1,4 +1,4 @@
-""" https://huggingface.co/docs/transformers/model_doc/clip """
+"""https://huggingface.co/docs/transformers/model_doc/clip"""
 
 import torch
 from torch import autocast, nn

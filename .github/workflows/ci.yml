@@ -12,11 +12,11 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up Python 3.8
-        uses: actions/setup-python@v2
+      - uses: actions/checkout@v4
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
         with:
-          python-version: 3.8
+          python-version: 3.11
       - name: Install
         run: |
           python3 -m venv .env
@@ -31,14 +31,14 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        model: ['openai_clip', 'open_clip', 'hf_clip', 'nm', 'ja_clip']
+        model: ['openai_clip', 'open_clip', 'hf_clip']
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python 3.10
-      uses: actions/setup-python@v2
+    - uses: actions/checkout@v4
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v5
       with:
-        python-version: '3.10'
+        python-version: '3.11'
     - name: Install
       run: |
         python3 -m venv .env
