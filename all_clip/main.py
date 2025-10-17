@@ -1,6 +1,6 @@
 """load clip"""
 
-from functools import lru_cache
+from functools import lru_cache, partial
 import torch
 from PIL import Image
 import time
@@ -14,6 +14,8 @@ from .ja_clip import load_japanese_clip
 
 _CLIP_REGISTRY = {
     "open_clip:": load_open_clip,
+    "open_clip_hf:": partial(load_open_clip, schema="hf-hub"),
+    "open_clip_local:": partial(load_open_clip, schema="local-dir"),
     "hf_clip:": load_hf_clip,
     "nm:": load_deepsparse,
     "ja_clip:": load_japanese_clip,
